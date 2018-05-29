@@ -59,8 +59,10 @@ spring:
 
   mail:
     host: smtp.qq.com
-    username: 1265129132@qq.com
-    password: iywtrkusgqxujfhe
+    username: 782529153@qq.com
+    password: omowmvqdxjqibecc
+    port: 587
+    protocol: smtp
     properties:
          mail:
            smth:
@@ -68,7 +70,5 @@ spring:
              starttls:
                enable: true
                required: true
-    port: 465
-    protocol: smtp
 
 

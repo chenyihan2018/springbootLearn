@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jslx.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -69,18 +70,24 @@ public class TestController {
         return value;
     }
 
+
     /**
      * 测试邮箱
      */
+
+    @Value("${spring.mail.username}")
+    private  String lastname;
+
     @Autowired
     private JavaMailSender javaMailSender;
     @RequestMapping(value = "/testmail")
+    @ResponseBody
     public String testMail(){
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("1265129132@qq.com");
+        simpleMailMessage.setFrom(lastname);
         simpleMailMessage.setSubject("hello Word");
         simpleMailMessage.setText("spring boot ,hello");
-        simpleMailMessage.setTo("782529153@qq.com");
+        simpleMailMessage.setTo("1265129132@qq.com");
 
         String result= "";
         try {
