@@ -11,6 +11,12 @@
   <sql id="Base_Column_List">
     id, username, password, age, create_time
   </sql>
+  <select id="selectByUsernameAndPassword" parameterType="com.jslx.model.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user
+    where username = #{username,jdbcType=VARCHAR} AND password = #{password,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

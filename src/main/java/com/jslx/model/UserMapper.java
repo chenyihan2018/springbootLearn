@@ -2,6 +2,8 @@ package com.jslx.model;
 
 import com.jslx.model.User;
 
+import javax.jws.soap.SOAPBinding;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,7 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByUsernameAndPassword(User user);
+
 }
