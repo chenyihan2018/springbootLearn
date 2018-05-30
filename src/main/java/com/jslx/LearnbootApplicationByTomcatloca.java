@@ -5,6 +5,7 @@ package com.jslx;/**
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author chenjia
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  **/
 @SpringBootApplication
 @ComponentScan(basePackages = "com.jslx")
+@EnableScheduling
 public class LearnbootApplicationByTomcatloca extends SpringBootServletInitializer {
 
 }
