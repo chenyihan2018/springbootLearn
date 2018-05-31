@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by xiaour.github.com on 2017/11/8.
  */
-@Service("redisService")
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class RedisServiceImpl implements RedisService {
 

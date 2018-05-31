@@ -52,6 +52,8 @@ public class adminController {
         if (selectUser==null){
             status=1;
             result="用户名密码错误";
+        }else {
+            result = "用户名正确";
         }
         JSONObject json = new  JSONObject();
         json.put("status",status);

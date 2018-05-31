@@ -45,6 +45,7 @@ function login() {
     $.ajax({
         type: 'POST',
         url: "/admin/login",
+        dataType: "json",
         data: {"username":username,"password":password},
         success: function (data) {
 			var value = eval(data);
@@ -55,8 +56,7 @@ function login() {
 				//登录成功
 
 			}
-        },
-        dataType: JSON
+        }
     });
 
 }
