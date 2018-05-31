@@ -6,7 +6,7 @@
 	<groupId>com.jslx</groupId>
 	<artifactId>learnboot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
 	<name>learnboot</name>
 	<description>Demo project for Spring Boot</description>
@@ -62,10 +62,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- springboot邮件发送 -->
 		<dependency>

@@ -11,4 +11,6 @@ import com.jslx.model.User;
  **/
 public interface UserService {
     public User selectByUsernameAndPassword(User user);
+
+    public User selectById(Integer id);
 }

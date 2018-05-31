@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    姓名: <div th:text="${user.username}">welcome to thymeleaf</div>
+    年龄: <div th:text="${user.age}">18岁</div>
+    welcome to thymeleaf
+
+
+    <div th:if="${not #lists.isEmpty(list)}">
+        <div class="panel panel-primary">
+            <h3 class="panel-title">list : 列表</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="panel-group">
+                <li class="list-group-item" th:each="person:${list}">
+                    <span th:text="${person}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div th:if="${not #maps.isEmpty(map)}">
+        <div class="panel panel-primary">
+            <h3 class="panel-title">map : 列表</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="panel-group">
+                <li class="list-group-item" th:each="lm:${map}">
+                    <span th:each="entry : ${lm}" th:text="${entry.key}"></span>
+                    <span th:each="entry : ${lm}" th:text="${entry.value}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+</html>

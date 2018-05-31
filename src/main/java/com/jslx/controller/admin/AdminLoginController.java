@@ -5,7 +5,6 @@ package com.jslx.controller.admin;/**
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jslx.model.User;
-import com.jslx.mapper.UserMapper;
 import com.jslx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  **/
 @Controller
 @RequestMapping(value = "/admin")
-public class adminController {
+public class AdminLoginController {
 
     @Autowired
     private UserService userService;

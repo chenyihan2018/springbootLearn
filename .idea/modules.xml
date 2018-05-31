@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/bean/bean.iml" filepath="$PROJECT_DIR$/bean/bean.iml" />
       <module fileurl="file://$PROJECT_DIR$/learnboot.iml" filepath="$PROJECT_DIR$/learnboot.iml" />
     </modules>
   </component>

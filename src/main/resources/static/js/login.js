@@ -54,7 +54,7 @@ function login() {
 				$("#message").html(value.result);
 			}else {
 				//登录成功
-
+				window.location.href="/blogs/home";
 			}
         }
     });
