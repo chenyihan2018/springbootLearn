@@ -15,6 +15,6 @@ public class QuartzJob1 implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-//        System.out.println("quartz 定时任务 1");
+        System.out.println("quartz 定时任务 1");
     }
 }
