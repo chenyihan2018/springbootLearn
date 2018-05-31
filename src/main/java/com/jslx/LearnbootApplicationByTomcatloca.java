@@ -2,6 +2,7 @@ package com.jslx;/**
  * Created by chenjia on 2018/5/28.
  */
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +14,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @desc
  **/
 @SpringBootApplication
-@ComponentScan(basePackages = "com.jslx")
+@ComponentScan(basePackages = "com.jslx.controller")
+@MapperScan("com.jslx.mapper")
 @EnableScheduling
 public class LearnbootApplicationByTomcatloca extends SpringBootServletInitializer {
 

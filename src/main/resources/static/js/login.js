@@ -47,7 +47,14 @@ function login() {
         url: "/admin/login",
         data: {"username":username,"password":password},
         success: function (data) {
+			var value = eval(data);
+			if(value.status==1){
+				//登录失败
+				$("#message").html(value.result);
+			}else {
+				//登录成功
 
+			}
         },
         dataType: JSON
     });

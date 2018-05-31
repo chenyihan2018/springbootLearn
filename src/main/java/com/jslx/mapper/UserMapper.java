@@ -1,8 +1,6 @@
-package com.jslx.model;
+package com.jslx.mapper;
 
 import com.jslx.model.User;
-
-import javax.jws.soap.SOAPBinding;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);

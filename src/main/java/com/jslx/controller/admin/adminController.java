@@ -5,7 +5,8 @@ package com.jslx.controller.admin;/**
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jslx.model.User;
-import com.jslx.model.UserMapper;
+import com.jslx.mapper.UserMapper;
+import com.jslx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class adminController {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     /**
      * 调到登录页面
@@ -47,7 +48,7 @@ public class adminController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        User selectUser = userMapper.selectByUsernameAndPassword(user);
+        User selectUser = userService.selectByUsernameAndPassword(user);
         if (selectUser==null){
             status=1;
             result="用户名密码错误";
