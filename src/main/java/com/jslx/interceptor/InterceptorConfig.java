@@ -33,17 +33,17 @@ public class InterceptorConfig implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-
         System.out.println("----------------------------------------------------------------------");
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //获取访问路径
         StringBuffer requestURL = httpServletRequest.getRequestURL();
+        StringBuilder sb = new StringBuilder();
+        String paraSb = "";
         if(requestURL!=null){
-            System.out.println("访问路径 : "+ requestURL.toString());
-            System.out.println("访问方法 : "+ httpServletRequest.getRequestURI().toString());
-            System.out.println("访问时间 : "+ sdf.format(new Date()));
-            StringBuilder sb = new StringBuilder();
+            System.out.println("请求路径 : "+ requestURL.toString());
+            System.out.println("请求方法 : "+ httpServletRequest.getRequestURI().toString());
+            System.out.println("请求方式 : "+ httpServletRequest.getMethod());
+            System.out.println("请求时间 : "+ sdf.format(new Date()));
             Map<String,String> parameterMap = httpServletRequest.getParameterMap();
             if(parameterMap!=null && parameterMap.size()>0 ){
                 for (Map.Entry<String,String> entry : parameterMap.entrySet()) {
@@ -64,12 +64,27 @@ public class InterceptorConfig implements HandlerInterceptor {
 
                     sb.append( key + "="+ value ).append(" ,");
                 }
-                String paraSb = sb.substring(0, sb.toString().length() - 1);
-                System.out.println("访问参数 : "+ paraSb );
+                   paraSb = sb.substring(0, sb.toString().length() - 1);
             }
         }
+        System.out.println("请求参数 : "+ paraSb );
         System.out.println("----------------------------------------------------------------------");
-        return true;
+
+        //获取方法的决定路径
+        String requestURI = httpServletRequest.getRequestURI();
+        //登录请求不拦截
+        if(requestURI.indexOf("admin/tologin")>0 || requestURI.indexOf("admin/login")>0){
+            return true;
+        }
+        //已经登录状态不拦截
+        HttpSession session = httpServletRequest.getSession();
+        String username = (String)session.getAttribute("username");
+        if(username != null){
+            return true;
+        }
+        //不符合添加的.跳转到登录页面
+        httpServletRequest.getRequestDispatcher("/admin/tologin").forward(httpServletRequest,httpServletResponse);
+        return false;
     }
 
     @Override

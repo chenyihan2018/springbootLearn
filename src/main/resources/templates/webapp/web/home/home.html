@@ -5,10 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    姓名: <div th:text="${user.username}">welcome to thymeleaf</div>
-    年龄: <div th:text="${user.age}">18岁</div>
-    welcome to thymeleaf
+姓名: <div th:text="${user.username}">welcome to thymeleaf</div>
+年龄: <div th:text="${user.age}">18岁</div>
+welcome to thymeleaf
 
+<button value="退出" onclick="logout()">退出</button>
 
     <div th:if="${not #lists.isEmpty(list)}">
         <div class="panel panel-primary">
@@ -39,5 +40,29 @@
     </div>
 
 
+
+
 </body>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function logout() {
+        $.ajax({
+            type: 'GET',
+            url: "/admin/logout",
+            dataType: "json",
+            data:{},
+            success: function (data) {
+                var value = eval(data);
+                if(value.status==1){
+                    $("#message").html(value.result);
+                }else {
+                    window.location.href="/admin/tologin";
+                }
+            }
+        });
+    }
+</script>
+
 </html>

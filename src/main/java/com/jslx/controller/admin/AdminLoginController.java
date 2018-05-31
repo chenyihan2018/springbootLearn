@@ -7,10 +7,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.jslx.model.User;
 import com.jslx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author chenjia
@@ -38,7 +42,7 @@ public class AdminLoginController {
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public JSON login(String username, String password){
+    public JSON login(String username, String password,HttpServletRequest request){
         //前台已经进行了判断.所以这里不用判断用户名,密码是不是空
 
         int status = 0;
@@ -53,6 +57,8 @@ public class AdminLoginController {
             result="用户名密码错误";
         }else {
             result = "用户名正确";
+            HttpSession session = request.getSession();
+            session.setAttribute("username",user.getUsername());
         }
         JSONObject json = new  JSONObject();
         json.put("status",status);
@@ -60,6 +66,21 @@ public class AdminLoginController {
         return json;
     }
 
+
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    @ResponseBody
+    public JSON logout(HttpServletRequest request){
+        int status=0;
+        String result= "操作成功";
+
+        HttpSession session = request.getSession();
+        session.removeAttribute("username");
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status",status);
+        jsonObject.put("result",result);
+        return jsonObject;
+    }
 
 
 }
