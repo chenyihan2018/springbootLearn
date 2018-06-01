@@ -2,6 +2,7 @@ package com.jslx.controller.admin;/**
  * Created by chenjia on 2018/5/31.
  */
 
+import com.jslx.config.WebAppConfig;
 import com.jslx.model.User;
 import com.jslx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.Map;
  * @desc
  **/
 @Controller
-@RequestMapping(value = "/blogs")
+@RequestMapping(value = "/layUi")
 public class AdminHomeController {
 
     @Autowired
@@ -28,26 +31,13 @@ public class AdminHomeController {
 
 
     @RequestMapping(value = "/home")
-    public String home(Model model){
+    public String home(Model model, HttpServletRequest request){
 
-        User user = userService.selectById(2);
-        List list = new ArrayList();
-        list.add("list 1 ");
-        list.add("list 2 ");
-        list.add("list 3 ");
-        list.add("list 4 ");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute(WebAppConfig.SESSION_KEY);
 
-        Map<String,String> map = new HashMap<>();
-        map.put("key1","value1");
-        map.put("key2","value2");
-        map.put("key3","value3");
-        map.put("key4","value4");
-
-        model.addAttribute("user",user);
-        model.addAttribute("list",list);
-        model.addAttribute("map",map);
-        model.addAttribute("username","陈佳");
-        return "home/home";
+        model.addAttribute("username",username);
+        return "index";
     }
 
 }

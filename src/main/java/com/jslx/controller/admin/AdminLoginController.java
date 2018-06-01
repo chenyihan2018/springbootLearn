@@ -4,6 +4,7 @@ package com.jslx.controller.admin;/**
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.jslx.config.WebAppConfig;
 import com.jslx.model.User;
 import com.jslx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminLoginController {
-
 
     @Autowired
     private UserService userService;
@@ -59,7 +59,7 @@ public class AdminLoginController {
         }else {
             result = "用户名正确";
             HttpSession session = request.getSession();
-            session.setAttribute("username",user.getUsername());
+            session.setAttribute(WebAppConfig.SESSION_KEY,user.getUsername());
         }
         JSONObject json = new  JSONObject();
         json.put("status",status);
@@ -73,9 +73,8 @@ public class AdminLoginController {
     public JSON logout(HttpServletRequest request){
         int status=0;
         String result= "操作成功";
-
         HttpSession session = request.getSession();
-        session.removeAttribute("username");
+        session.removeAttribute(WebAppConfig.SESSION_KEY);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status",status);

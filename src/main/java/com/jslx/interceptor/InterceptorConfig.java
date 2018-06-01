@@ -2,6 +2,7 @@ package com.jslx.interceptor;/**
  * Created by chenjia on 2018/5/30.
  */
 
+import com.jslx.config.WebAppConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -78,7 +79,7 @@ public class InterceptorConfig implements HandlerInterceptor {
         }
         //已经登录状态不拦截
         HttpSession session = httpServletRequest.getSession();
-        String username = (String)session.getAttribute("username");
+        String username = (String)session.getAttribute(WebAppConfig.SESSION_KEY);
         if(username != null){
             return true;
         }

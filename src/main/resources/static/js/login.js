@@ -1,62 +1,56 @@
-$(function(){
-	$('#username').focus().blur(checkName);
-	$('#password').blur(checkPassword);
-});
+layui.use(['form','layer','jquery'],function(){
+    var form = layui.form,
+        layer = parent.layer === undefined ? layui.layer : top.layer
+        $ = layui.jquery;
 
-function checkName(){
-	var name = $('#username').val();
-	if(name == null || name == ""){
-		//提示错误
-		$('#count-msg').html("用户名不能为空");
-		return false;
-	}
-	var reg = /^\w{3,10}$/;
-	if(!reg.test(name)){
-		$('#count-msg').html("输入3-10个字母或数字或下划线");
-		return false;
-	}
-	$('#count-msg').empty();
-	return true;
-}
+    $(".loginBody .seraph").click(function(){
+        layer.msg("这只是做个样式，至于功能，你见过哪个后台能这样登录的？还是老老实实的找管理员去注册吧",{
+            time:5000
+        });
+    })
 
-function checkPassword(){
-	var password = $('#password').val();
-	if(password == null || password == ""){
-		//提示错误
-		$('#password-msg').html("密码不能为空");
-		return false;
-	}
-	var reg = /^\w{3,10}$/;
-	if(!reg.test(password)){
-		$('#password-msg').html("输入3-10个字母或数字或下划线");
-		return false;
-	}
-	$('#password-msg').empty();
-	return true;
-}
+    //登录按钮
+    form.on("submit(login)",function(data){
+        var username = $("#userName").val();
+        var password = $('#password').val();
+        $(this).text("登录中...").attr("disabled","disabled").addClass("layui-disabled");
+        $.ajax({
+            type: 'POST',
+            url: "/admin/login",
+            dataType: "json",
+            data: {"username":username,"password":password},
+            success: function (data) {
+                var value = eval(data);
+                if(value.status==1){
+                    //登录失败
+                    $("#message").html(value.result);
+                    $('.layui-btn').text("登录").removeAttr("disabled","").removeClass("layui-disabled");
+                }else {
+                    //登录成功
+                    window.location.href = "/layUi/home";
+                }
+            }
+        });
+        // setTimeout(function(){
+        //     window.location.href = "/layuicms2.0";
+        // },1000);
+        return false;
+    })
 
-/**
- * 登录
- */
-function login() {
-	var username = $("#username").val();
-    var password = $('#password').val();
-
-    $.ajax({
-        type: 'POST',
-        url: "/admin/login",
-        dataType: "json",
-        data: {"username":username,"password":password},
-        success: function (data) {
-			var value = eval(data);
-			if(value.status==1){
-				//登录失败
-				$("#message").html(value.result);
-			}else {
-				//登录成功
-				window.location.href="/blogs/home";
-			}
+    //表单输入效果
+    $(".loginBody .input-item").click(function(e){
+        e.stopPropagation();
+        $(this).addClass("layui-input-focus").find(".layui-input").focus();
+    })
+    $(".loginBody .layui-form-item .layui-input").focus(function(){
+        $(this).parent().addClass("layui-input-focus");
+    })
+    $(".loginBody .layui-form-item .layui-input").blur(function(){
+        $(this).parent().removeClass("layui-input-focus");
+        if($(this).val() != ''){
+            $(this).parent().addClass("layui-input-active");
+        }else{
+            $(this).parent().removeClass("layui-input-active");
         }
-    });
-
-}
+    })
+})
